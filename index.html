@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🕌 Jadwal Salat Indonesia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🕌 Jadwal Salat Indonesia</h1>
+      <p class="subtitle">Lihat jadwal salat harian berdasarkan wilayah Anda</p>
+    </header>
+
+    <main>
+      <div class="card">
+        <div class="controls">
+          <select id="provinsiSelect">
+            <option value="">-- Pilih Provinsi --</option>
+          </select>
+          <select id="kabupatenSelect" disabled>
+            <option value="">-- Pilih Kabupaten/Kota --</option>
+          </select>
+          <button id="loadDataBtn">Tampilkan Jadwal</button>
+        </div>
+
+        <div id="dataContainer" class="fade">
+          <div class="loading">Silakan pilih provinsi dan kabupaten terlebih dahulu.</div>
+        </div>
+
+        <div id="debugInfo"></div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Jadwal Salat Indonesia | Dibuat dengan 💙</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
