@@ -6,6 +6,9 @@ on:
     - cron: "5 0 1 * *"
   workflow_dispatch: # Bisa dijalankan manual juga dari GitHub
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -13,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -31,6 +36,10 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Auto update data JSON ($(date '+%Y-%m-%d'))" || echo "No changes"
-          git push
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Auto update data JSON ($(date '+%Y-%m-%d'))"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
